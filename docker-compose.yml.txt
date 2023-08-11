@@ -1,0 +1,20 @@
+version: '3'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./html:/usr/share/nginx/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rohan
+      MYSQL_DATABASE: webapp_db
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
